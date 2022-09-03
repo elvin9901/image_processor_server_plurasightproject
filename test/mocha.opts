@@ -1,0 +1,8 @@
+
+--reporter list
+
+--require test/mocha-config.js
+
+--timeout 5000
+
+--exit

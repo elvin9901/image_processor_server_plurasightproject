@@ -1,0 +1,92 @@
+TASK 1:
+In api/src/imageProcessor.js, let's require path from the path module.
+Next require Worker and isMainThread from the worker_threads module.
+Let's define a function called imageProcessor. Export it using module.exports.
+
+TASK 2:
+Next return a new Promise from the image processor.
+Let's pass an anonymous function to our promise. It should take resolve and reject as arguments.
+Inside of our function body let's check if we are on the main thread using isMainThread. If we aren't on the
+main thread, make a call to reject within an else block. Pass in a new Error with the message 'not on main thread'.
+
+TASK 3:
+Define a constant outside of the imageProcessor function called pathToResizeWorker. Assign to it a call to the resolve method
+of path. Pass in __dirname as the first argument, and 'resizeWorker.js' as the second. 
+
+TASK 4:
+Define a constant outside of the imageProcessor function called pathToMonochromeWorker. Assign to it a call to the resolve method
+of path. Pass in __dirname as the first argument, and 'monochromeWorker.js' as the second. 
+
+TASK 5:
+Define a function called uploadPathResolver. It should take filename as an argument.
+It should return a call to path.resolve passing in __dirname, '..', 'uploads', and filename.
+
+TASK 6:
+Pass an argument representing the filename to imageProcessor.
+Define a constant called sourcePath within the imageProcessor.
+Assign to it a call to uplodPathResolver passing in the filename parameter as the argument.
+
+TASK 7:
+Define a constant inside  of our imageProcessor function, before the promise, called resizedDestination.
+Assign to it a call to the uploadPathResolver passing in 'resized-' concatenated with the filename parameter.
+
+TASK 8:
+Define a constant called monochromeDestination inside imageProcessor.
+Assign to it a call to the uploadPathResolver passing in 'monochrome-' concatenated with the filename parameter.
+
+
+TASK 9:
+Inside the if block within our promise, let's create a try/catch statement.
+Inside the try, assign to a constant called resizeWorker, a new instantiation of the Worker class. Pass in the pathToResizeWorker
+as the first argument. As for the second argument pass in an object literal with a key of workerData and a value
+that is another object literal. Within the workerData object define a key called source with our sourcePath constant as the value. Define another key on workerData called destination, assign to it our resizedDestination constant. 
+Inside the catch call reject passing in the error.
+
+TASK 10:
+Inside the if block within our promise, assign to a constant called monochromeWorker a new instantiation of the
+Worker class. Pass in the pathToMonochromeWorker as the first argument. As for the second argument pass in an
+object literal with a key of workerData and a value that is another object literal. Within the workerData object
+define a key called source with our sourcePath constant as the value. Define another key on workerData called
+destination assign to it our monochromeDestination constant. 
+
+Task 11:
+Before our promise, assign to a let called resizeWorkerFinished the boolean value false.
+Within our try block, call the on method of our resizeWorker. Let's pass the string 'message' as the first
+argument. The second argument should be an anonymous function that takes an argument called message. Inside the
+body of the function set the resizeWorkerFinished variable to true. Call resolve with the string 'resizeWorker finished processing'.
+
+TASK 12:
+Next let's call the on method of resizeWorker again. This time let's register the 'error' event. Pass an anonymous
+function that takes error as an argument. In the body of the callback function make a call to reject passing an object with the key resizeError with the value error.message.
+
+TASK 13:
+Let's register another event to the resizeWorker. Call the on method again, this time pass in the event name 'exit'
+as the first argument. The anonymous callback function should take code as it's argument. Next check to see if the
+code is strictly equal to 0. If it is call reject passing in an object with the key ExitError and the value of code.
+
+TASK 14:
+Just above our promise, assign to a let called monochromeWorkerFinished the boolean value false.
+Let's register some events on the monochromeWorker. Call it's on method, pass the string 'message' as the first
+argument. The second argument should be an anonymous function that takes an argument called message. Inside the
+body of the function set the monochromWorkerFinished variable to true. Then check if the resizeWorkerFinished is true. If so, call resolve with the string 'monochromeWorker finished processing'. Go back up to the resizeWorkers message event listener. Wrap the resolve in an if statement that runs if the monochrome worker has finished processing.
+
+TASK 15:
+Next let's call the on method of monochromeWorker again. This time let's register the 'error' event. Pass an
+anonymous function that takes error as an argument. In the body of the callback function make a call to reject passing an object with the key monochromeError and value error.message.
+
+TASK 16:
+Let's register another event to the monochromeWorker. Call the on method again, this time pass in the event name
+'exit' as the first argument. The anonymous callback function should take code as it's argument. Next check to see if the code is strictly equal to 0. If it is call reject passing in an object with the key ExitError and the value of code.
+
+
+TASK 17:
+Let's head back to the router.js file. Require the imageProcessor. Then mark our callback function as async in
+ our post method on the '/upload' route. After our file validation check, in the body of our async callback, await
+a call to the imageProcessor passing in req.file.filename as it's only argument.
+
+TASK 18:
+In the photo-viewer.html file, inside the client directory, let's add another img tag after our first. This one
+should have an src attribute equal to 'monochrome-ullr.png'.
+
+TASK 19:
+Add another img tag with an attribute of 'resized-ullr.png' after our monochrome image.

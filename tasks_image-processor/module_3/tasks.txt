@@ -1,0 +1,54 @@
+TASK 1:
+In router.js let's import path.
+Declare a constant called photoPath. Assign to it a call to the resolve method of path. The four arguments we are going to pass are __dirname, '../../', 'client', and 'photo-viewer.html'.
+
+TASK 2:
+Let's call the get method of our router object. Pass thr route '/photo-viewer' as the first argument.
+The second argument is an anonymous callback function that takes req and res as arguments.
+In the body of the function lets call the sendFile method of res, passing in the photoPath constant as it's
+only argument.
+
+TASK 3:
+Let's open up photo-viewer.html inside the client directory.
+Inside the body tag let's add an img tag with an src attribute with the value "ullr.png" and a class of photo.
+
+TASK 4:
+Inside the resizeWorker.js file within the api/src directory require gm from the gm module.
+Require workerData and parentPort from the worker_threads module.
+Make a call to gm, passing in workerData.source.
+
+TASK 5:
+Chain a call to resize off of gm, passing in 100 as the first and second argument.
+
+TASK 6:
+Chain a call to write off of resize, pass in workerData.destination as the first argument.
+The second argument should be an anonymous function.
+
+TASK 7: 
+Pass error as the argument to our anonymous function.
+Inside the function body, check if error is a truthy value. If it is throw the error.
+
+TASK 8:
+Also inside the function body, let's make a call to parentPort.postMessage. Pass in an object literal with a key
+of resized and the boolean value true.
+
+TASK 9:
+Inside the monochromeWorker.js file within the api/src directory require gm from the gm module.
+Require workerData and parentPort from the worker_threads module.
+Make a call to gm, passing in workerData.source.
+
+TASK 10:
+Chain a call to monochrome off of gm.
+
+TASK 11:
+Chain a call to write off of monochrome, pass in workerData.destination as the first argument.
+The second argument should be an anonymous function.
+
+TASK 12: 
+Pass error as the argument to our anonymous function.
+Inside the function body, check if error is a truthy value. If it is throw the error.
+
+TASK 13:
+Also inside the function body, let's make a call to parentPort.postMessage. Pass in an object literal with a key
+of monochrome and the boolean value true.
+
