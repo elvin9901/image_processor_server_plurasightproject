@@ -1,3 +1,5 @@
+#this Project is a on-hands  Plurasight Project 
+
 To run the project you must first install graphicsmagick.
 On Mac use the homebrew package manager.
 ```
