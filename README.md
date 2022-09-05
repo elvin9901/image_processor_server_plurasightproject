@@ -17,6 +17,4 @@ Run the unit tests
 ```
 npm run test
 ```
-Run an individual test
-```
 
