@@ -19,6 +19,4 @@ npm run test
 ```
 Run an individual test
 ```
-npm run test:module-3
-```
 
